@@ -6,6 +6,8 @@ import logo from "../assets/logoMottu.png";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerParamList } from "../routes/DrawerRoutes";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppStackParamList } from "../routes/StackRoutes";
 
 interface SignUpFormProps {
     isLogin: boolean;
@@ -13,7 +15,7 @@ interface SignUpFormProps {
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
-    const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
+    const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>();
 
     return (
         <View style={styles.inner}>
@@ -27,7 +29,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
             <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
                 {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
             </Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Drawer")}>
                 <Text>Entrar</Text>
             </TouchableOpacity>
         </View>

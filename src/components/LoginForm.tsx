@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text, TextInput } from "react-native-paper";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import logo from "../assets/logoMottu.png";
 import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { DrawerParamList } from "../routes/DrawerRoutes";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppStackParamList } from "../routes/StackRoutes";
 
 interface LoginFormProps {
     isLogin: boolean;
@@ -13,24 +13,58 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
-    const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
+    const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>();
+
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const salvarLogin = async () => {
+        try {
+            const dados = {
+                email,
+                senha,
+            };
+            await AsyncStorage.setItem("@dadosUsuario", JSON.stringify(dados));
+            navigation.navigate("Drawer");
+        } catch (error) {
+            console.error("Erro ao salvar login:", error);
+        }
+    };
+
     return (
         <View style={styles.inner}>
             <Image source={logo} style={styles.logo} />
             <Text style={{ color: "#00A431", fontSize: 24, marginBottom: 20 }}>
                 {isLogin ? "Login" : "Cadastro"}
             </Text>
-            <TextInput mode="outlined" label="Email" style={styles.input} textColor="#fff" activeOutlineColor="#00A431" />
-            <TextInput mode="outlined" label="Senha" style={styles.input} textColor="#fff" activeOutlineColor="#00A431" secureTextEntry />
+            <TextInput
+                mode="outlined"
+                label="Email"
+                value={email}
+                onChangeText={setEmail}
+                style={styles.input}
+                textColor="#fff"
+                activeOutlineColor="#00A431"
+            />
+            <TextInput
+                mode="outlined"
+                label="Senha"
+                value={senha}
+                onChangeText={setSenha}
+                style={styles.input}
+                textColor="#fff"
+                activeOutlineColor="#00A431"
+                secureTextEntry
+            />
             <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
                 {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
             </Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity style={styles.button} onPress={salvarLogin}>
                 <Text>Entrar</Text>
             </TouchableOpacity>
         </View>
     );
-}
+};
 
 export default LoginForm;
 
@@ -48,7 +82,7 @@ const styles = StyleSheet.create({
     input: {
         width: "100%",
         marginBottom: 10,
-        backgroundColor: '#000'
+        backgroundColor: "#000",
     },
     button: {
         backgroundColor: "#00A431",
@@ -61,5 +95,5 @@ const styles = StyleSheet.create({
         color: "#00A431",
         marginTop: 10,
         marginBottom: 15,
-    }
+    },
 });
