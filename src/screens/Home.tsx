@@ -10,9 +10,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Home: React.FC = () => (
     <View style={styles.container}>
         <ScrollView>
-            <ImagemButton src={patioMottu} text="Setores do Pátio" />
-            <ImagemButton src={motoMottu} text="Motos do Pátio" />
-            <ImagemButton src={logo} text="Sobre Nós" />
+            <ImagemButton src={patioMottu} text="Setores do Pátio" navigate='AboutUs' />
+            <ImagemButton src={motoMottu} text="Motos do Pátio" navigate='AboutUs' />
+            <ImagemButton src={logo} text="Sobre Nós" navigate='AboutUs' />
         </ScrollView>
     </View>
 );

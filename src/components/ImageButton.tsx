@@ -1,13 +1,18 @@
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { DrawerParamList } from "../routes/DrawerRoutes";
+import { useNavigation } from "@react-navigation/native";
 
 interface ImagemButtonProps {
     text: string,
     src: ImageSourcePropType,
+    navigate: keyof DrawerParamList,
 }
 
-const ImagemButton: React.FC<ImagemButtonProps> = ({ text, src }) => {
+const ImagemButton: React.FC<ImagemButtonProps> = ({ text, src, navigate }) => {
+    const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
     return (
-        <TouchableOpacity style={styles.imageButtonWrapper}>
+        <TouchableOpacity style={styles.imageButtonWrapper} onPress={() => navigation.navigate(navigate)}>
             <Image source={src} style={styles.imageButton} />
             <View style={styles.overlay}>
                 <Text style={styles.overlayText}>{text}</Text>
