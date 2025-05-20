@@ -31,43 +31,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    imageButtonWrapper: {
-        height: 200,
-        borderRadius: 8,
-        overflow: 'hidden',
-        marginHorizontal: 5,
-        position: 'relative',
-    },
-    imageButton: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
-    },
-    overlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    overlayText: {
-        color: '#00A431',
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    squareButton: {
-        flex: 1,
-        marginHorizontal: 5,
-        borderWidth: 1,
-        borderColor: '#00A431',
-        borderRadius: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 50,
-    },
-    buttonText: {
-        color: '#00A431',
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
 });

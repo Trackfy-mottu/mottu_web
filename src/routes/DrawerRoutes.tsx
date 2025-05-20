@@ -5,10 +5,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Home from '../screens/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Login from '../screens/Login';
+import AboutUs from '../screens/AboutUs';
 
 export type DrawerParamList = {
   Home: undefined;
-  Login: undefined;
+  AboutUs: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -16,6 +17,9 @@ const Drawer = createDrawerNavigator<DrawerParamList>();
 const DrawerRoutes: React.FC = () => {
   return (
     <Drawer.Navigator initialRouteName="Home" screenOptions={{
+      headerTitle: () => (
+        <Ionicons name="navigate" size={28} color="#00A431" />
+      ),
       headerStyle: {
         backgroundColor: "#000",
       },
@@ -33,6 +37,10 @@ const DrawerRoutes: React.FC = () => {
       <Drawer.Screen name="Home" component={Home} options={{
         drawerIcon: ({ color }) => <Ionicons name="home" size={20} color={color} />,
         drawerLabel: "Home",
+      }} />
+      <Drawer.Screen name="AboutUs" component={AboutUs} options={{
+        drawerIcon: ({ color }) => <Ionicons name="people" size={20} color={color} />,
+        drawerLabel: "Sobre Nós",
       }} />
     </Drawer.Navigator>
   );
