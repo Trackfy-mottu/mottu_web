@@ -11,7 +11,7 @@ const Home: React.FC = () => (
     <View style={styles.container}>
         <ScrollView>
             <ImagemButton src={patioMottu} text="Setores do Pátio" navigate='AboutUs' />
-            <ImagemButton src={motoMottu} text="Motos do Pátio" navigate='AboutUs' />
+            <ImagemButton src={motoMottu} text="Motos do Pátio" navigate='Bikes' />
             <ImagemButton src={logo} text="Sobre Nós" navigate='AboutUs' />
         </ScrollView>
     </View>

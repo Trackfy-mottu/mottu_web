@@ -6,10 +6,12 @@ import Home from '../screens/Home';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Login from '../screens/Login';
 import AboutUs from '../screens/AboutUs';
+import Bikes from '../screens/Bikes';
 
 export type DrawerParamList = {
   Home: undefined;
   AboutUs: undefined;
+  Bikes: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -41,6 +43,10 @@ const DrawerRoutes: React.FC = () => {
       <Drawer.Screen name="AboutUs" component={AboutUs} options={{
         drawerIcon: ({ color }) => <Ionicons name="people" size={20} color={color} />,
         drawerLabel: "Sobre Nós",
+      }} />
+      <Drawer.Screen name="Bikes" component={Bikes} options={{
+        drawerIcon: ({ color }) => <Ionicons name="bicycle" size={20} color={color} />,
+        drawerLabel: "Motos",
       }} />
     </Drawer.Navigator>
   );
