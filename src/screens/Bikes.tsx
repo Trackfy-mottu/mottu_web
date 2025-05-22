@@ -1,10 +1,13 @@
-// screens/HomeScreen.tsx
 import React from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import { View, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import sportMoto from '../assets/sportMoto.png';
 import Emoto from '../assets/Emoto.png';
 import popMoto from '../assets/popMoto.png';
 import { BikeCard } from '../components/BikeCard';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { DrawerParamList } from '../routes/DrawerRoutes';
 
 const motos = [
     {
@@ -31,11 +34,17 @@ const motos = [
 ];
 
 export default function HomeScreen() {
+    const navigation = useNavigation<DrawerNavigationProp<DrawerParamList>>();
+
     return (
         <View style={styles.container}>
             <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
                 Motos do Pátio
             </Text>
+            <TouchableOpacity onPress={() => { navigation.navigate("BikesForm") }} style={{ display: "flex", flexDirection: "row", gap: 3, alignItems: "center", backgroundColor: '#00A431', padding: 10, borderRadius: 5, marginBottom: 20 }}>
+                <Ionicons name="add" size={20} color="#fff" />
+                <Text style={{ color: '#fff', fontSize: 16 }}>Cadastrar Moto</Text>
+            </TouchableOpacity>
             <ScrollView>
                 {motos.map((moto, index) => (
                     <BikeCard
