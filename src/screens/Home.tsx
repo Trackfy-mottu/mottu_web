@@ -6,7 +6,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import logo from "../assets/logoTrackfy.png";
 import motoMottu from "../assets/motoMottu.jpg";
 import patioMottu from "../assets/patioMottu.jpg";
-import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useTheme } from "../services/ThemeContext";
 
 const Home: React.FC = () => {
@@ -14,7 +13,6 @@ const Home: React.FC = () => {
   const styles = getStyles(colors);
   return (
     <View style={styles.container}>
-      <ThemeToggleButton />
       <ScrollView>
         <ImagemButton
           src={patioMottu}
@@ -37,6 +35,7 @@ const getStyles = (colors: any) =>
       justifyContent: "space-evenly",
       backgroundColor: colors.background,
       paddingHorizontal: 10,
+      paddingTop: 15,
     },
     row: {
       flexDirection: "row",

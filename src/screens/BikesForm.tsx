@@ -1,135 +1,139 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
-    Image,
-    Alert,
-} from 'react-native';
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useTheme } from "../services/ThemeContext";
 
 const BikeSignUp: React.FC = () => {
-    const [modelo, setModelo] = useState('');
-    const [placa, setPlaca] = useState('');
-    const [status, setStatus] = useState('');
-    const [pendencias, setPendencias] = useState('');
-    const [imagem, setImagem] = useState(null);
+  const [modelo, setModelo] = useState("");
+  const [placa, setPlaca] = useState("");
+  const [status, setStatus] = useState("");
+  const [pendencias, setPendencias] = useState("");
+  const [imagem, setImagem] = useState(null);
 
-    const handleCadastrar = () => {
-        if (!modelo || !placa || !status) {
-            Alert.alert('Erro', 'Preencha todos os campos obrigatórios.');
-            return;
-        }
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
 
-        const novaMoto = {
-            modelo,
-            placa,
-            status,
-            pendencias,
-            imagem,
-        };
+  const handleCadastrar = () => {
+    if (!modelo || !placa || !status) {
+      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
+      return;
+    }
 
-        console.log('Moto cadastrada:', novaMoto);
-        Alert.alert('Sucesso', 'Moto cadastrada com sucesso!');
-
-        setModelo('');
-        setPlaca('');
-        setStatus('');
-        setPendencias('');
-        setImagem(null);
+    const novaMoto = {
+      modelo,
+      placa,
+      status,
+      pendencias,
+      imagem,
     };
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.titulo}>Cadastro de Moto</Text>
+    console.log("Moto cadastrada:", novaMoto);
+    Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
 
-            <TextInput
-                style={styles.input}
-                placeholder="Modelo"
-                placeholderTextColor="#fff"
-                value={modelo}
-                onChangeText={setModelo}
-            />
+    setModelo("");
+    setPlaca("");
+    setStatus("");
+    setPendencias("");
+    setImagem(null);
+  };
 
-            <TextInput
-                style={styles.input}
-                placeholder="Placa"
-                placeholderTextColor="#fff"
-                value={placa}
-                onChangeText={setPlaca}
-            />
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Cadastro de Moto</Text>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Status"
-                placeholderTextColor="#fff"
-                value={status}
-                onChangeText={setStatus}
-            />
+      <TextInput
+        style={styles.input}
+        placeholder="Modelo"
+        placeholderTextColor={colors.text}
+        value={modelo}
+        onChangeText={setModelo}
+      />
 
-            <TextInput
-                style={styles.input}
-                placeholder="Pendências"
-                placeholderTextColor="#fff"
-                value={pendencias}
-                onChangeText={setPendencias}
-            />
+      <TextInput
+        style={styles.input}
+        placeholder="Placa"
+        placeholderTextColor={colors.text}
+        value={placa}
+        onChangeText={setPlaca}
+      />
 
-            <TouchableOpacity style={styles.botaoCadastrar} onPress={handleCadastrar}>
-                <Text style={styles.textoBotao}>Cadastrar</Text>
-            </TouchableOpacity>
-        </View>
-    );
-}
+      <TextInput
+        style={styles.input}
+        placeholder="Status"
+        placeholderTextColor={colors.text}
+        value={status}
+        onChangeText={setStatus}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Pendências"
+        placeholderTextColor={colors.text}
+        value={pendencias}
+        onChangeText={setPendencias}
+      />
+
+      <TouchableOpacity style={styles.botaoCadastrar} onPress={handleCadastrar}>
+        <Text style={styles.textoBotao}>Cadastrar</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 export default BikeSignUp;
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) =>
+  StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#000',
-        padding: 20,
+      flex: 1,
+      backgroundColor: colors.background,
+      padding: 20,
     },
     titulo: {
-        fontSize: 24,
-        color: '#fff',
-        fontWeight: 'bold',
-        marginBottom: 20,
-        textAlign: 'center',
+      fontSize: 24,
+      color: colors.text,
+      fontWeight: "bold",
+      marginBottom: 20,
+      textAlign: "center",
     },
     input: {
-        backgroundColor: '#1c1c1c',
-        borderColor: '#00A431',
-        borderWidth: 1,
-        borderRadius: 8,
-        color: '#fff',
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        marginBottom: 15,
+      backgroundColor: colors.inputBackground,
+      borderColor: "#00A431",
+      borderWidth: 1,
+      borderRadius: 8,
+      color: colors.text,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      marginBottom: 15,
     },
     imagemButton: {
-        backgroundColor: '#1c1c1c',
-        borderColor: '#00A431',
-        borderWidth: 1,
-        borderRadius: 8,
-        padding: 12,
-        alignItems: 'center',
-        marginBottom: 20,
+      backgroundColor: "#1c1c1c",
+      borderColor: "#00A431",
+      borderWidth: 1,
+      borderRadius: 8,
+      padding: 12,
+      alignItems: "center",
+      marginBottom: 20,
     },
     imagemButtonText: {
-        color: '#00A431',
-        fontSize: 16,
+      color: "#00A431",
+      fontSize: 16,
     },
     botaoCadastrar: {
-        backgroundColor: '#00A431',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
+      backgroundColor: "#00A431",
+      padding: 15,
+      borderRadius: 10,
+      alignItems: "center",
     },
     textoBotao: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
+      color: colors.buttonText,
+      fontSize: 16,
+      fontWeight: "bold",
     },
-});
+  });

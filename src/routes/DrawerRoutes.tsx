@@ -1,3 +1,4 @@
+import Feather from "@expo/vector-icons/Feather";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -18,14 +19,33 @@ export type DrawerParamList = {
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
+import { TouchableOpacity } from "react-native";
+
 const DrawerRoutes: React.FC = () => {
-  const { colors } = useTheme();
+  const { colors, toggleTheme, theme } = useTheme();
   return (
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{
         headerTitle: () => (
           <Ionicons name="navigate" size={28} color="#00A431" />
+        ),
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={toggleTheme}
+            style={{
+              marginRight: 16,
+              padding: 6,
+              borderRadius: 6,
+              backgroundColor: colors.background,
+            }}
+          >
+            {theme === "dark" ? (
+              <Feather name="sun" size={24} color={"#facc15"} />
+            ) : (
+              <Feather name="moon" size={24} color={"#facc15"} />
+            )}
+          </TouchableOpacity>
         ),
         headerStyle: {
           backgroundColor: colors.background,

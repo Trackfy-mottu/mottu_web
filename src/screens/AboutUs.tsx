@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../components/Card";
-import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useTheme } from "../services/ThemeContext";
 
 const imagens = {
@@ -18,7 +17,6 @@ export default function About() {
 
   return (
     <View style={styles.container}>
-      <ThemeToggleButton />
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>Nosso Time</Text>
 

@@ -3,7 +3,6 @@ import { Image, SafeAreaView, StyleSheet } from "react-native";
 import logo from "../assets/logoMottu.png";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
-import ThemeToggleButton from "../components/ThemeToggleButton";
 import { useTheme } from "../services/ThemeContext";
 
 const Login: React.FC = () => {
@@ -13,7 +12,6 @@ const Login: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.logo} />
-      <ThemeToggleButton />
       {isLogin ? (
         <LoginForm isLogin={isLogin} setIsLogin={setIsLogin} />
       ) : (
