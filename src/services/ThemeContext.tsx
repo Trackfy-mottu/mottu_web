@@ -38,6 +38,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       inputBackground: "#f3f4f6",
       drawerActiveText: "#fff",
       drawerInactiveText: "#000",
+      cardBackground: "#f3f4f6",
     },
     dark: {
       background: "#000",
@@ -47,6 +48,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       inputBackground: "#1f1f1f",
       drawerActiveText: "#000",
       drawerInactiveText: "#fff",
+      cardBackground: "#1f1f1f",
     },
   };
   return (
