@@ -33,18 +33,20 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
     light: {
       background: "#fff",
       text: "#000",
-      button: "#007",
       buttonText: "#fff",
       themeToggleText: "#d1d5db",
       inputBackground: "#f3f4f6",
+      drawerActiveText: "#fff",
+      drawerInactiveText: "#000",
     },
     dark: {
       background: "#000",
       text: "#fff",
-      button: "#00A431",
       buttonText: "#252525",
       themeToggleText: "#252525",
       inputBackground: "#1f1f1f",
+      drawerActiveText: "#000",
+      drawerInactiveText: "#fff",
     },
   };
   return (

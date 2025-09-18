@@ -42,6 +42,7 @@ const getStyles = (colors: any) =>
       alignItems: "center",
       justifyContent: "center",
       marginBottom: 16,
+      marginTop: 16,
       borderRadius: 8,
       gap: 10,
     },
