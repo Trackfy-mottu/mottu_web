@@ -15,11 +15,13 @@ export type DrawerParamList = {
   Bikes: undefined;
   Patio: undefined;
   BikesForm: undefined;
+  Logout: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
 import { TouchableOpacity } from "react-native";
+import LogoutScreen from "../screens/Logout";
 
 const DrawerRoutes: React.FC = () => {
   const { colors, toggleTheme, theme } = useTheme();
@@ -110,6 +112,16 @@ const DrawerRoutes: React.FC = () => {
             <Ionicons name="build" size={20} color={color} />
           ),
           drawerLabel: "Setores do Pátio",
+        }}
+      />
+      <Drawer.Screen
+        name="Logout"
+        component={LogoutScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="log-out" size={20} color={color} />
+          ),
+          drawerLabel: "Sair",
         }}
       />
     </Drawer.Navigator>
