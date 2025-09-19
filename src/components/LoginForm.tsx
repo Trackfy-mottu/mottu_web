@@ -6,6 +6,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import { AppStackParamList } from "../routes/StackRoutes";
 import { useTheme } from "../services/ThemeContext";
+import axios from "axios";
 
 interface LoginFormProps {
   isLogin: boolean;
@@ -20,15 +21,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const salvarLogin = async () => {
     try {
+      setLoading(true)
       const dados = {
         email,
         senha,
       };
-      await AsyncStorage.setItem("@dadosUsuario", JSON.stringify(dados));
+      const {data} = await axios.post("https://localhost:8080/api/login", dados)
+      console.log(data);
+      await AsyncStorage.setItem("@dadosUsuario", JSON.stringify(data));
       navigation.navigate("Drawer");
+      setLoading(false)
     } catch (error) {
       console.error("Erro ao salvar login:", error);
     }
