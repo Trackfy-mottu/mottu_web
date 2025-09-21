@@ -1,26 +1,51 @@
-import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Picker } from "@react-native-picker/picker";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
 } from "react-native";
 import { useTheme } from "../services/ThemeContext";
+
+export interface Court {
+  acessCode: string;
+  name: string;
+  address: string;
+  maxCapacity: number;
+  currentBikes: number;
+}
+interface Auth {
+  token: string;
+  username: string;
+  role: string;
+  court: Court;
+}
 
 const BikeSignUp: React.FC = () => {
   const [modelo, setModelo] = useState("");
   const [placa, setPlaca] = useState("");
+  const [idChassi, setIdChassi] = useState("");
+  const [localizacao, setLocalizacao] = useState("");
   const [status, setStatus] = useState("");
-  const [pendencias, setPendencias] = useState("");
-  const [imagem, setImagem] = useState(null);
+  const [auth, setAuth] = useState<Auth>();
 
   const { colors } = useTheme();
   const styles = getStyles(colors);
 
-  const handleCadastrar = () => {
-    if (!modelo || !placa || !status) {
+  const useAuth = async () => {
+    const data = await AsyncStorage.getItem("@dadosUsuario");
+    if (!data) return;
+    const { token, username, role, court } = JSON.parse(data);
+    setAuth({ token, username, role, court });
+  };
+
+  const handleCadastrar = async () => {
+    if (!modelo || !placa || !status || !idChassi || !localizacao) {
       Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
       return;
     }
@@ -28,32 +53,44 @@ const BikeSignUp: React.FC = () => {
     const novaMoto = {
       modelo,
       placa,
+      idChassi: Number(idChassi),
+      localizacao,
       status,
-      pendencias,
-      imagem,
+      pendencias: [],
+      court: {
+        acessCode: auth?.court.acessCode,
+      },
     };
 
-    console.log("Moto cadastrada:", novaMoto);
-    Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
+    const { data } = await axios.post(
+      "http://192.168.0.21:8080/api/bike",
+      novaMoto,
+      {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      }
+    );
 
     setModelo("");
     setPlaca("");
+    setIdChassi("");
+    setLocalizacao("");
     setStatus("");
-    setPendencias("");
-    setImagem(null);
+    Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Cadastro de Moto</Text>
+  useEffect(() => {
+    useAuth();
+  }, []);
 
-      <TextInput
-        style={styles.input}
-        placeholder="Modelo"
-        placeholderTextColor={colors.text}
-        value={modelo}
-        onChangeText={setModelo}
-      />
+  return (
+    <ScrollView
+      style={{ width: "100%", backgroundColor: colors.background }}
+      contentContainerStyle={{ padding: 20 }}
+      keyboardShouldPersistTaps="handled"
+    >
+      <Text style={styles.titulo}>Cadastro de Moto</Text>
 
       <TextInput
         style={styles.input}
@@ -65,24 +102,68 @@ const BikeSignUp: React.FC = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Status"
+        placeholder="ID do Chassi"
         placeholderTextColor={colors.text}
-        value={status}
-        onChangeText={setStatus}
+        value={idChassi}
+        onChangeText={setIdChassi}
+        keyboardType="numeric"
       />
 
-      <TextInput
+      <Picker
+        selectedValue={modelo}
         style={styles.input}
-        placeholder="Pendências"
-        placeholderTextColor={colors.text}
-        value={pendencias}
-        onChangeText={setPendencias}
-      />
+        onValueChange={setModelo}
+      >
+        <Picker.Item color={colors.text} label="Selecione o modelo" value="" />
+        <Picker.Item color={colors.text} label="Mottu Sport" value="Sport" />
+        <Picker.Item color={colors.text} label="Mottu Pop" value="Pop" />
+        <Picker.Item color={colors.text} label="Mottu E" value="E" />
+      </Picker>
 
+      <Picker
+        selectedValue={localizacao}
+        style={styles.input}
+        onValueChange={setLocalizacao}
+      >
+        <Picker.Item
+          color={colors.text}
+          label="Selecione a localização"
+          value=""
+        />
+        <Picker.Item color={colors.text} label="Fora do pátio" value="FORA" />
+        <Picker.Item
+          color={colors.text}
+          label="Dentro do pátio"
+          value="DENTRO"
+        />
+      </Picker>
+
+      <Picker
+        selectedValue={status}
+        style={styles.input}
+        onValueChange={setStatus}
+      >
+        <Picker.Item color={colors.text} label="Selecione o status" value="" />
+        <Picker.Item
+          color={colors.text}
+          label="Pronta Para Uso"
+          value="ProntoParaUso"
+        />
+        <Picker.Item
+          color={colors.text}
+          label="Em Manutenção"
+          value="Manutencao"
+        />
+        <Picker.Item
+          color={colors.text}
+          label="Para Descarte"
+          value="Indisponivel"
+        />
+      </Picker>
       <TouchableOpacity style={styles.botaoCadastrar} onPress={handleCadastrar}>
         <Text style={styles.textoBotao}>Cadastrar</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -90,11 +171,6 @@ export default BikeSignUp;
 
 const getStyles = (colors: any) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.background,
-      padding: 20,
-    },
     titulo: {
       fontSize: 24,
       color: colors.text,
