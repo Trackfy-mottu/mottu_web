@@ -1,12 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import { AppStackParamList } from "../routes/StackRoutes";
 import { useTheme } from "../services/ThemeContext";
-import axios from "axios";
 
 interface LoginFormProps {
   isLogin: boolean;
@@ -21,56 +27,87 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [showSenha, setShowSenha] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const redirect = async () => {
+    const dadosUsuario = await AsyncStorage.getItem("@dadosUsuario");
+    if (dadosUsuario) navigation.navigate("Drawer");
+  };
 
   const salvarLogin = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const dados = {
-        email,
-        senha,
+        username: email,
+        password: senha,
       };
-      const {data} = await axios.post("https://localhost:8080/api/login", dados)
-      console.log(data);
+      const { data } = await axios.post(
+        "http://192.168.0.21:8080/api/login",
+        dados
+      );
       await AsyncStorage.setItem("@dadosUsuario", JSON.stringify(data));
       navigation.navigate("Drawer");
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.error("Erro ao salvar login:", error);
+      setError("Falha no login. Verifique suas credenciais.");
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    redirect();
+  }, []);
+
   return (
-    <View style={styles.inner}>
-      <Text style={{ color: "#00A431", fontSize: 24, marginBottom: 20 }}>
-        {isLogin ? "Login" : "Cadastro"}
-      </Text>
-      <TextInput
-        mode="outlined"
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        textColor="#fff"
-        activeOutlineColor="#00A431"
-      />
-      <TextInput
-        mode="outlined"
-        label="Senha"
-        value={senha}
-        onChangeText={setSenha}
-        style={styles.input}
-        textColor="#fff"
-        activeOutlineColor="#00A431"
-        secureTextEntry
-      />
-      <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
-        {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
-      </Text>
-      <TouchableOpacity style={styles.button} onPress={salvarLogin}>
-        <Text style={{ color: colors.buttonText }}>Entrar</Text>
-      </TouchableOpacity>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ width: "100%", alignItems: "center", justifyContent: "center" }}
+    >
+      <View style={styles.inner}>
+        <Text style={{ color: "#00A431", fontSize: 24, marginBottom: 20 }}>
+          Login
+        </Text>
+        <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
+        <TextInput
+          mode="outlined"
+          label="Email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+          textColor={colors.text}
+          activeOutlineColor="#00A431"
+        />
+        <TextInput
+          mode="outlined"
+          label="Senha"
+          value={senha}
+          onChangeText={setSenha}
+          style={styles.input}
+          textColor={colors.text}
+          activeOutlineColor="#00A431"
+          secureTextEntry={!showSenha}
+          right={
+            <TextInput.Icon
+              icon={showSenha ? "eye-off" : "eye"}
+              onPress={() => setShowSenha((prev) => !prev)}
+            />
+          }
+        />
+        <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
+          {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
+        </Text>
+        <TouchableOpacity
+          disabled={loading}
+          style={styles.button}
+          onPress={() => salvarLogin()}
+        >
+          <Text style={{ color: colors.buttonText }}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
