@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, SafeAreaView, StyleSheet } from "react-native";
+import { Image, ScrollView, StyleSheet } from "react-native";
 import logo from "../assets/logoMottu.png";
 import LoginForm from "../components/LoginForm";
 import SignUpForm from "../components/SignUpForm";
@@ -10,14 +10,14 @@ const Login: React.FC = () => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Image source={logo} style={styles.logo} />
       {isLogin ? (
         <LoginForm isLogin={isLogin} setIsLogin={setIsLogin} />
       ) : (
         <SignUpForm isLogin={isLogin} setIsLogin={setIsLogin} />
       )}
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -26,14 +26,11 @@ export default Login;
 const getStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      flex: 1,
+      width: "100%",
       backgroundColor: colors.background,
       justifyContent: "center",
       alignItems: "center",
-    },
-    inner: {
-      width: "80%",
-      alignItems: "center",
+      paddingVertical: 25,
     },
     logo: {
       width: 150,
@@ -52,10 +49,5 @@ const getStyles = (colors: any) =>
       borderRadius: 5,
       alignItems: "center",
       width: "100%",
-    },
-    toggleIsLogin: {
-      color: "#00A431",
-      marginTop: 10,
-      marginBottom: 15,
     },
   });

@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
@@ -38,6 +39,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
 
   const salvarLogin = async () => {
     try {
+      if (!email || !senha)
+        return setError("Por favor, preencha todos os campos.");
       setLoading(true);
       const dados = {
         username: email,
@@ -104,7 +107,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
           style={styles.button}
           onPress={() => salvarLogin()}
         >
-          <Text style={{ color: colors.buttonText }}>Entrar</Text>
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={{ color: colors.buttonText }}>
+              {isLogin ? "Entrar" : "Cadastrar"}
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

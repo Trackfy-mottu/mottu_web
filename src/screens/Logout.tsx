@@ -1,13 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-// import { DrawerParamList } from "../routes/DrawerRoutes";
 import { useTheme } from "../services/ThemeContext";
 
 export default function LogoutScreen() {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const navigation = useNavigation();
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("@dadosUsuario");
     navigation.reset({
       index: 0,
       routes: [{ name: "Login" as never }],
@@ -17,7 +18,7 @@ export default function LogoutScreen() {
   return (
     <View style={styles.inner}>
       <Text style={styles.title}>Tem certeza que deseja sair?</Text>
-      <TouchableOpacity style={styles.button} onPress={handleLogout}>
+      <TouchableOpacity style={styles.button} onPress={() => handleLogout()}>
         <Text style={styles.buttonText}>Sair</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.goBack()}>
