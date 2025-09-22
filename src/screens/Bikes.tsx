@@ -61,8 +61,13 @@ export default function HomeScreen() {
 
   useEffect(() => {
     useAuth();
-    getBikes();
   }, []);
+
+  useEffect(() => {
+    if (auth) {
+      getBikes();
+    }
+  }, [auth]);
 
   return (
     <View style={styles.container}>
