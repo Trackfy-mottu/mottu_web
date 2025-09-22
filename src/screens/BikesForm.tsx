@@ -19,7 +19,7 @@ export interface Court {
   maxCapacity: number;
   currentBikes: number;
 }
-interface Auth {
+export interface Auth {
   token: string;
   username: string;
   role: string;
@@ -45,6 +45,7 @@ const BikeSignUp: React.FC = () => {
   };
 
   const handleCadastrar = async () => {
+    if (!auth) return;
     if (!modelo || !placa || !status || !idChassi || !localizacao) {
       Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
       return;

@@ -8,7 +8,7 @@ import { useTheme } from "../services/ThemeContext";
 const Login: React.FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const { colors } = useTheme();
-  const styles = getStyles(colors);
+  const styles = getStyles(colors, isLogin);
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={logo} style={styles.logo} />
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
 export default Login;
 
-const getStyles = (colors: any) =>
+const getStyles = (colors: any, isLogin: boolean) =>
   StyleSheet.create({
     container: {
       width: "100%",
@@ -31,6 +31,7 @@ const getStyles = (colors: any) =>
       justifyContent: "center",
       alignItems: "center",
       paddingVertical: 25,
+      height: isLogin ? "100%" : "auto",
     },
     logo: {
       width: 150,
