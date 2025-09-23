@@ -78,7 +78,7 @@ export default function HomeScreen() {
         }}
         style={styles.button}
       >
-        <Ionicons name="add" size={20} color={colors.buttonText} />
+        <Ionicons name="add" size={20} color="#fff" />
         <Text style={styles.buttonText}>Cadastrar Moto</Text>
       </TouchableOpacity>
       <ScrollView>
@@ -89,6 +89,7 @@ export default function HomeScreen() {
             placa={bike.placa}
             status={bike.status}
             pendencias={bike.pendencias}
+            onPendingCreated={getBikes}
           />
         ))}
       </ScrollView>
@@ -122,7 +123,7 @@ const getStyles = (colors: any) =>
       marginBottom: 20,
     },
     buttonText: {
-      color: colors.buttonText,
+      color: "#fff",
       fontSize: 16,
     },
   });
