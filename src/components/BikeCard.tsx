@@ -1,9 +1,19 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Emoto from "../assets/Emoto.png";
 import popMoto from "../assets/popMoto.png";
 import sportMoto from "../assets/sportMoto.png";
+import { Auth } from "../screens/BikesForm";
 import { useTheme } from "../services/ThemeContext";
 import AddPendingModal from "./AddPendingModal";
 import PendingDetailsModal from "./PendingDetailsModal";
@@ -40,6 +50,33 @@ export const BikeCard: React.FC<BikeCardProps> = ({
   const styles = getStyles(colors);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
+  const [auth, setAuth] = useState<Auth>();
+
+  const useAuth = async () => {
+    const data = await AsyncStorage.getItem("@dadosUsuario");
+    if (!data) return;
+    const { token, username, role, court } = JSON.parse(data);
+    setAuth({ token, username, role, court });
+  };
+
+  const deleteBike = async () => {
+    try {
+      await axios.delete(`http://192.168.0.21:8080/api/bike/${placa}`, {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      });
+      Alert.alert("Sucesso", "Moto deletada com sucesso.");
+      onPendingCreated && onPendingCreated();
+    } catch (error) {
+      console.error("Error deleting bike:", error);
+      Alert.alert("Erro", "Não foi possível deletar a moto.");
+    }
+  };
+
+  useEffect(() => {
+    useAuth();
+  }, []);
 
   return (
     <View style={styles.bikeCard}>
@@ -75,6 +112,19 @@ export const BikeCard: React.FC<BikeCardProps> = ({
         >
           Ver detalhes das pendências
         </Text>
+        <View style={styles.actionButtonsContainer}>
+          <TouchableOpacity
+            style={[styles.actionButton, { borderColor: "#007bff" }]}
+          >
+            <AntDesign name="edit" size={22} color="#007bff" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton, { borderColor: "#ff3b30" }]}
+            onPress={() => deleteBike()}
+          >
+            <AntDesign name="delete" size={22} color="#ff3b30" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <PendingDetailsModal
@@ -141,5 +191,21 @@ const getStyles = (colors: any) =>
       color: "#fff",
       fontWeight: "bold",
       fontSize: 14,
+    },
+    actionButtonsContainer: {
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      gap: 16,
+      marginTop: 10,
+    },
+    actionButton: {
+      backgroundColor: colors.buttonBackground,
+      borderRadius: 8,
+      padding: 8,
+      marginRight: 4,
+      alignItems: "center",
+      justifyContent: "center",
+      elevation: 2,
+      borderWidth: 1,
     },
   });

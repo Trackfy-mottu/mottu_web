@@ -39,6 +39,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       drawerActiveText: "#fff",
       drawerInactiveText: "#000",
       cardBackground: "#f3f4f6",
+      buttonBackground: "#fff",
     },
     dark: {
       background: "#000",
@@ -49,6 +50,7 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
       drawerActiveText: "#000",
       drawerInactiveText: "#fff",
       cardBackground: "#1f1f1f",
+      buttonBackground: "#000",
     },
   };
   return (
