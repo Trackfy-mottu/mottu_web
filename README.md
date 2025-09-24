@@ -1,4 +1,3 @@
-
 # 🛰️ Projeto de Mapeamento de Setores com Sensores
 
 ## 📋 Descrição
@@ -78,3 +77,6 @@ Esse comando abrirá o **Expo DevTools** no navegador.
 3. O app será carregado automaticamente no dispositivo
 
 ---
+
+## Video da aplicação
+- https://youtu.be/Yhw00OrE6qs
