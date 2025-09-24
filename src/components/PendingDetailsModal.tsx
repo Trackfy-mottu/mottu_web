@@ -74,6 +74,7 @@ export default function PendingDetailsModal({
       });
 
       Alert.alert("Sucesso", "Pendência alterada com sucesso.");
+      onPendingCreated && onPendingCreated();
       setDialogVisible(false);
     } catch {
       Alert.alert("Erro", "Não foi possível alterar a pendência.");

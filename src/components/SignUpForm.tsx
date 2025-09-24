@@ -147,7 +147,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
             {allCourts.map((court) => (
               <Picker.Item
                 key={court.acessCode}
-                style={{ color: colors.text }}
+                color={colors.text}
                 label={court.name}
                 value={court.acessCode}
               />
@@ -163,14 +163,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
             dropdownIconColor="#00A431"
             onValueChange={(itemValue: any) => setRole(itemValue)}
           >
-            <Picker.Item
-              label="Admin"
-              style={{ color: colors.text }}
-              value="ADMIN"
-            />
+            <Picker.Item label="Admin" color={colors.text} value="ADMIN" />
             <Picker.Item
               label="Funcionário"
-              style={{ color: colors.text }}
+              color={colors.text}
               value="EMPLOYEE"
             />
           </Picker>
@@ -219,7 +215,6 @@ const getStyles = (colors: any) =>
     },
     picker: {
       width: "100%",
-      color: "#fff",
     },
     label: {
       color: "#00A431",
