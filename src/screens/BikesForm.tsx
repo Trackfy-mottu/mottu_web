@@ -158,7 +158,7 @@ const BikeSignUp: React.FC = () => {
         <Picker.Item
           color={colors.text}
           label="Para Descarte"
-          value="Indisponivel"
+          value="Descarte"
         />
       </Picker>
       <TouchableOpacity style={styles.botaoCadastrar} onPress={handleCadastrar}>

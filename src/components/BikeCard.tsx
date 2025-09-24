@@ -22,7 +22,11 @@ export interface Pending {
   id: number;
   number: number;
   descricao: string;
+  description?: string;
   status: string;
+  bike?: {
+    placa: string;
+  };
 }
 
 interface BikeCardProps {
@@ -34,9 +38,9 @@ interface BikeCardProps {
 }
 
 const images: { [key: string]: any } = {
-  Sport: Emoto,
+  Sport: sportMoto,
   Pop: popMoto,
-  E: sportMoto,
+  E: Emoto,
 };
 
 export const BikeCard: React.FC<BikeCardProps> = ({
@@ -128,9 +132,11 @@ export const BikeCard: React.FC<BikeCardProps> = ({
       </View>
 
       <PendingDetailsModal
+        bikePlaca={placa}
         dialogVisible={dialogVisible}
         setDialogVisible={setDialogVisible}
         pendencias={pendencias}
+        onPendingCreated={onPendingCreated}
       />
       <AddPendingModal
         addModalVisible={addModalVisible}

@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -63,11 +63,13 @@ export default function HomeScreen() {
     useAuth();
   }, []);
 
-  useEffect(() => {
-    if (auth) {
-      getBikes();
-    }
-  }, [auth]);
+  useFocusEffect(
+    useCallback(() => {
+      if (auth) {
+        getBikes();
+      }
+    }, [auth])
+  );
 
   return (
     <View style={styles.container}>
