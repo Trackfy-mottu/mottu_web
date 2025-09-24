@@ -1,5 +1,7 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
@@ -13,6 +15,7 @@ import {
 import Emoto from "../assets/Emoto.png";
 import popMoto from "../assets/popMoto.png";
 import sportMoto from "../assets/sportMoto.png";
+import { AppStackParamList } from "../routes/StackRoutes";
 import { Auth } from "../screens/BikesForm";
 import { useTheme } from "../services/ThemeContext";
 import AddPendingModal from "./AddPendingModal";
@@ -21,7 +24,6 @@ import PendingDetailsModal from "./PendingDetailsModal";
 export interface Pending {
   id: number;
   number: number;
-  descricao: string;
   description?: string;
   status: string;
   bike?: {
@@ -34,6 +36,7 @@ interface BikeCardProps {
   placa: string;
   status: string;
   pendencias: Pending[];
+  idChassi: string;
   onPendingCreated?: () => void;
 }
 
@@ -48,8 +51,11 @@ export const BikeCard: React.FC<BikeCardProps> = ({
   placa,
   status,
   pendencias,
+  idChassi,
   onPendingCreated,
 }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AppStackParamList>>();
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -119,6 +125,11 @@ export const BikeCard: React.FC<BikeCardProps> = ({
         <View style={styles.actionButtonsContainer}>
           <TouchableOpacity
             style={[styles.actionButton, { borderColor: "#007bff" }]}
+            onPress={() =>
+              navigation.navigate("BikesForm", {
+                bike: { modelo, placa, status, pendencias, idChassi },
+              })
+            }
           >
             <AntDesign name="edit" size={22} color="#007bff" />
           </TouchableOpacity>

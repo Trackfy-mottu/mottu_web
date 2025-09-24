@@ -22,6 +22,7 @@ interface Bike {
   status: string;
   pendencias: Pending[];
   imagem: string;
+  idChassi: string;
 }
 
 export default function HomeScreen() {
@@ -91,6 +92,7 @@ export default function HomeScreen() {
             placa={bike.placa}
             status={bike.status}
             pendencias={bike.pendencias}
+            idChassi={bike.idChassi}
             onPendingCreated={getBikes}
           />
         ))}

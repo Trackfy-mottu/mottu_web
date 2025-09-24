@@ -1,5 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
@@ -10,6 +12,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { AppStackParamList } from "../routes/StackRoutes";
 import { useTheme } from "../services/ThemeContext";
 
 export interface Court {
@@ -26,7 +29,16 @@ export interface Auth {
   court: Court;
 }
 
+interface RouteParams {
+  bike?: any;
+  token?: string;
+}
+
 const BikeSignUp: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AppStackParamList>>();
+  const route = useRoute();
+  const { bike } = (route.params as RouteParams) || {};
   const [modelo, setModelo] = useState("");
   const [placa, setPlaca] = useState("");
   const [idChassi, setIdChassi] = useState("");
@@ -42,6 +54,44 @@ const BikeSignUp: React.FC = () => {
     if (!data) return;
     const { token, username, role, court } = JSON.parse(data);
     setAuth({ token, username, role, court });
+  };
+
+  const handleEditar = async () => {
+    if (!auth) return;
+    if (!modelo || !placa || !status || !idChassi || !localizacao) {
+      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
+      return;
+    }
+
+    const motoAtualizada = {
+      ...bike,
+      modelo,
+      placa,
+      idChassi: Number(idChassi),
+      localizacao,
+      status,
+      court: {
+        acessCode: auth?.court.acessCode,
+      },
+    };
+
+    const { data } = await axios.put(
+      `http://192.168.0.21:8080/api/bike/${bike.placa}`,
+      motoAtualizada,
+      {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      }
+    );
+
+    Alert.alert("Sucesso", "Moto atualizada com sucesso!");
+    setModelo("");
+    setPlaca("");
+    setIdChassi("");
+    setLocalizacao("");
+    setStatus("");
+    navigation.navigate("Bikes");
   };
 
   const handleCadastrar = async () => {
@@ -84,6 +134,16 @@ const BikeSignUp: React.FC = () => {
   useEffect(() => {
     useAuth();
   }, []);
+
+  useEffect(() => {
+    if (bike) {
+      setModelo(bike.modelo ?? "");
+      setPlaca(bike.placa ?? "");
+      setIdChassi(bike.idChassi ? bike.idChassi.toString() : "");
+      setLocalizacao(bike.localizacao ?? "");
+      setStatus(bike.status ?? "");
+    }
+  }, [bike]);
 
   return (
     <ScrollView
@@ -161,8 +221,11 @@ const BikeSignUp: React.FC = () => {
           value="Descarte"
         />
       </Picker>
-      <TouchableOpacity style={styles.botaoCadastrar} onPress={handleCadastrar}>
-        <Text style={styles.textoBotao}>Cadastrar</Text>
+      <TouchableOpacity
+        style={styles.botaoCadastrar}
+        onPress={!bike ? handleCadastrar : handleEditar}
+      >
+        <Text style={styles.textoBotao}>{!bike ? "Cadastrar" : "Editar"}</Text>
       </TouchableOpacity>
     </ScrollView>
   );

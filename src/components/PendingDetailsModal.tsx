@@ -63,7 +63,6 @@ export default function PendingDetailsModal({
       if (!pending) return;
       pending = {
         ...pending,
-        description: pending.descricao,
         status: "Resolvido",
         bike: { placa: bikePlaca },
       };
@@ -103,7 +102,7 @@ export default function PendingDetailsModal({
                 <View key={p.id} style={styles.pendingItem}>
                   <Text style={styles.info}>
                     <Text style={{ fontWeight: "bold" }}>Descrição:</Text>{" "}
-                    {p.descricao}
+                    {p.description}
                   </Text>
                   <Text style={styles.info}>
                     <Text style={{ fontWeight: "bold" }}>Status:</Text>{" "}
