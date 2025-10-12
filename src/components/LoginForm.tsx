@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -31,6 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
   const [loading, setLoading] = useState(false);
   const [showSenha, setShowSenha] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const redirect = async () => {
     const dadosUsuario = await AsyncStorage.getItem("@dadosUsuario");
@@ -85,7 +87,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
         />
         <TextInput
           mode="outlined"
-          label="Senha"
+          label={t("login.passwordPlaceholder")}
           value={senha}
           onChangeText={setSenha}
           style={styles.input}
@@ -100,7 +102,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
           }
         />
         <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
-          {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
+          {isLogin ? t("login.notHasAccountText") : t("login.hasAccountText")}
         </Text>
         <TouchableOpacity
           disabled={loading}
@@ -111,7 +113,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
             <ActivityIndicator color="#fff" />
           ) : (
             <Text style={{ color: colors.buttonText }}>
-              {isLogin ? "Entrar" : "Cadastrar"}
+              {t("login.loginButton")}
             </Text>
           )}
         </TouchableOpacity>

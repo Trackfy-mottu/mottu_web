@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Alert,
   Image,
@@ -61,6 +62,7 @@ export const BikeCard: React.FC<BikeCardProps> = ({
   const [dialogVisible, setDialogVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
   const [auth, setAuth] = useState<Auth>();
+  const { t } = useTranslation();
 
   const useAuth = async () => {
     const data = await AsyncStorage.getItem("@dadosUsuario");
@@ -76,11 +78,11 @@ export const BikeCard: React.FC<BikeCardProps> = ({
           Authorization: `Bearer ${auth?.token}`,
         },
       });
-      Alert.alert("Sucesso", "Moto deletada com sucesso.");
+      Alert.alert("Sucesso", t("bikeCard.successMessage"));
       onPendingCreated && onPendingCreated();
     } catch (error) {
       console.error("Error deleting bike:", error);
-      Alert.alert("Erro", "Não foi possível deletar a moto.");
+      Alert.alert("Erro", t("bikeCard.errorMessage"));
     }
   };
 
@@ -103,16 +105,24 @@ export const BikeCard: React.FC<BikeCardProps> = ({
           onPress={() => setAddModalVisible(true)}
         >
           <AntDesign name="plus" size={20} color="#fff" />
-          <Text style={styles.addPendingButtonText}>Pendência</Text>
+          <Text style={styles.addPendingButtonText}>
+            {t("bikeCard.addPendingButton")}
+          </Text>
         </TouchableOpacity>
       </View>
       <View
         style={{ marginTop: 10, alignItems: "center", width: "60%", gap: 10 }}
       >
         <Text style={styles.modelo}>{modelo}</Text>
-        <Text style={styles.info}>Placa: {placa}</Text>
-        <Text style={styles.info}>Status: {status}</Text>
-        <Text style={styles.info}>Pendências: {pendencias.length}</Text>
+        <Text style={styles.info}>
+          {t("bikeCard.placaLabel")} {placa}
+        </Text>
+        <Text style={styles.info}>
+          {t("bikeCard.statusLabel")} {status}
+        </Text>
+        <Text style={styles.info}>
+          {t("bikeCard.pendenciasLabel")} {pendencias.length}
+        </Text>
         <Text
           style={[
             styles.info,
@@ -120,7 +130,7 @@ export const BikeCard: React.FC<BikeCardProps> = ({
           ]}
           onPress={() => setDialogVisible(true)}
         >
-          Ver detalhes das pendências
+          {t("bikeCard.showPendingsDetailsButton")}
         </Text>
         <View style={styles.actionButtonsContainer}>
           <TouchableOpacity

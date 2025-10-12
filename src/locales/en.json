@@ -1,0 +1,41 @@
+{
+  "addPendingModal": {
+    "modalTitle": "Register Pending Task",
+    "descriptionInputLabel": "Description",
+    "inputPlaceholder": "Select the task status",
+    "statusOption1": "Pending",
+    "statusOption2": "In Progress",
+    "statusOption3": "Resolved",
+    "cancelButton": "Cancel",
+    "addButton": "Register",
+    "errorMessage": "Unable to register the pending task.",
+    "successMessage": "Pending task registered successfully.",
+    "formErrorMessage": "Please fill in all required fields."
+  },
+  "bikeCard": {
+    "successMessage": "Motorcycle deleted successfully.",
+    "errorMessage": "Unable to delete the motorcycle.",
+    "addPendingButton": "Pending",
+    "placaLabel": "Plate: ",
+    "statusLabel": "Status: ",
+    "pendenciasLabel": "Pending Tasks: ",
+    "showPendingsDetailsButton": "View pending details"
+  },
+  "login": {
+    "passwordPlaceholder": "Password",
+    "hasAccountText": "Already have an account? ",
+    "notHasAccountText": "Don't have an account? ",
+    "loginButton": "Login"
+  },
+  "pendingDetailsModal": {
+    "successMessage": "Pending task deleted successfully.",
+    "errorMessage": "Unable to delete the pending task.",
+    "changePendingSuccessMessage": "Pending task updated successfully.",
+    "changePendingErrorMessage": "Unable to update the pending task.",
+    "modalTitle": "Pending Details",
+    "withoutPendings": "No pending tasks.",
+    "descriptionLabel": "Description: ",
+    "statusLabel": "Status: ",
+    "closeModalButton": "Close"
+  }
+}

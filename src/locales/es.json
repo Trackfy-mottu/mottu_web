@@ -1,0 +1,41 @@
+{
+  "addPendingModal": {
+    "modalTitle": "Registrar Pendencia",
+    "descriptionInputLabel": "Descripción",
+    "inputPlaceholder": "Seleccione el estado de la tarea",
+    "statusOption1": "Pendiente",
+    "statusOption2": "En Progreso",
+    "statusOption3": "Resuelta",
+    "cancelButton": "Cancelar",
+    "addButton": "Registrar",
+    "errorMessage": "No se pudo registrar la pendencia.",
+    "successMessage": "Pendencia registrada con éxito.",
+    "formErrorMessage": "Complete todos los campos obligatorios."
+  },
+  "bikeCard": {
+    "successMessage": "Motocicleta eliminada con éxito.",
+    "errorMessage": "No se pudo eliminar la motocicleta.",
+    "addPendingButton": "Pendencia",
+    "placaLabel": "Placa: ",
+    "statusLabel": "Estado: ",
+    "pendenciasLabel": "Pendencias: ",
+    "showPendingsDetailsButton": "Ver detalles de las pendencias"
+  },
+  "login": {
+    "passwordPlaceholder": "Contraseña",
+    "hasAccountText": "¿Ya tienes una cuenta? ",
+    "notHasAccountText": "¿No tienes una cuenta? ",
+    "loginButton": "Iniciar sesión"
+  },
+  "pendingDetailsModal": {
+    "successMessage": "Pendencia eliminada con éxito.",
+    "errorMessage": "No se pudo eliminar la pendencia.",
+    "changePendingSuccessMessage": "Pendencia actualizada con éxito.",
+    "changePendingErrorMessage": "No se pudo actualizar la pendencia.",
+    "modalTitle": "Detalles de las Pendencias",
+    "withoutPendings": "No hay pendencias.",
+    "descriptionLabel": "Descripción: ",
+    "statusLabel": "Estado: ",
+    "closeModalButton": "Cerrar"
+  }
+}

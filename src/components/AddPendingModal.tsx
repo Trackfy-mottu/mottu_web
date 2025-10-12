@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Alert,
   Modal,
@@ -33,6 +34,7 @@ export default function AddPendingModal({
   const [status, setStatus] = useState<string>();
   const [auth, setAuth] = useState<Auth>();
   const [error, setError] = useState<string>();
+  const { t } = useTranslation();
 
   const useAuth = async () => {
     const data = await AsyncStorage.getItem("@dadosUsuario");
@@ -44,7 +46,7 @@ export default function AddPendingModal({
   const createPending = async () => {
     if (!auth) return;
     if (!description || !status) {
-      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
+      Alert.alert("Erro", t("addPendingModal.formErrorMessage"));
       return;
     }
     try {
@@ -63,13 +65,13 @@ export default function AddPendingModal({
         },
       });
 
-      Alert.alert("Sucesso", "Pendência cadastrada com sucesso.");
+      Alert.alert("Sucesso", t("addPendingModal.successMessage"));
       setStatus("");
       setDescription("");
       setAddModalVisible(false);
       if (onPendingCreated) onPendingCreated();
     } catch (error) {
-      Alert.alert("Erro", "Não foi possível cadastrar a pendência.");
+      Alert.alert("Erro", t("addPendingModal.errorMessage"));
     }
   };
 
@@ -86,10 +88,12 @@ export default function AddPendingModal({
     >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Cadastrar Pendência</Text>
+          <Text style={styles.modalTitle}>
+            {t("addPendingModal.modalTitle")}
+          </Text>
           <TextInput
             style={styles.input}
-            placeholder="Descrição"
+            placeholder={t("addPendingModal.descriptionInputLabel")}
             placeholderTextColor="#888"
             value={description}
             onChangeText={(text) => setDescription(text)}
@@ -104,10 +108,22 @@ export default function AddPendingModal({
               }}
               dropdownIconColor={colors.text}
             >
-              <Picker.Item label="Selecione o status da tarefa" value="" />
-              <Picker.Item label="Pendente" value="Pendente" />
-              <Picker.Item label="Em Andamento" value="EmAndamento" />
-              <Picker.Item label="Resolvido" value="Resolvido" />
+              <Picker.Item
+                label={t("addPendingModal.inputPlaceholder")}
+                value=""
+              />
+              <Picker.Item
+                label={t("addPendingModal.statusOption1")}
+                value="Pendente"
+              />
+              <Picker.Item
+                label={t("addPendingModal.statusOption2")}
+                value="EmAndamento"
+              />
+              <Picker.Item
+                label={t("addPendingModal.statusOption3")}
+                value="Resolvido"
+              />
             </Picker>
           </View>
           <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
@@ -116,7 +132,7 @@ export default function AddPendingModal({
               onPress={() => setAddModalVisible(false)}
             >
               <Text style={{ color: "#fff", fontWeight: "bold" }}>
-                Cancelar
+                {t("addPendingModal.cancelButton")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -124,7 +140,7 @@ export default function AddPendingModal({
               onPress={() => createPending()}
             >
               <Text style={{ color: "#fff", fontWeight: "bold" }}>
-                Cadastrar
+                {t("addPendingModal.addButton")}
               </Text>
             </TouchableOpacity>
           </View>

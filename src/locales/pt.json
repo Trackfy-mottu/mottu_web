@@ -1,0 +1,41 @@
+{
+  "addPendingModal": {
+    "modalTitle": "Cadastrar Pendência",
+    "descriptionInputLabel": "Descrição",
+    "inputPlaceholder": "Selecione o status da tarefa",
+    "statusOption1": "Pendente",
+    "statusOption2": "Em Andamento",
+    "statusOption3": "Resolvido",
+    "cancelButton": "Cancelar",
+    "addButton": "Cadastrar",
+    "errorMessage": "Não foi possível cadastrar a pendência.",
+    "successMessage": "Pendência cadastrada com sucesso.",
+    "formErrorMessage": "Preencha todos os campos obrigatórios."
+  },
+  "bikeCard": {
+    "successMessage": "Moto deletada com sucesso.",
+    "errorMessage": "Não foi possível deletar a moto.",
+    "addPendingButton": "Pendência",
+    "placaLabel": "Placa: ",
+    "statusLabel": "Status: ",
+    "pendenciasLabel": "Pendências: ",
+    "showPendingsDetailsButton": "Ver detalhes das pendências"
+  },
+  "login": {
+    "passwordPlaceholder": "Senha",
+    "hasAccountText": "Já tem uma conta? ",
+    "notHasAccountText": "Não tem uma conta? ",
+    "loginButton": "Entrar"
+  },
+  "pendingDetailsModal": {
+    "successMessage": "Pendência deletada com sucesso.",
+    "errorMessage": "Não foi possível deletar a pendência.",
+    "changePendingSuccessMessage": "Pendência alterada com sucesso.",
+    "changePendingErrorMessage": "Não foi possível alterar a pendência.",
+    "modalTitle": "Detalhes das Pendências",
+    "withoutPendings": "Nenhuma pendência.",
+    "descriptionLabel": "Descrição: ",
+    "statusLabel": "Status: ",
+    "closeModalButton": "Fechar"
+  }
+}

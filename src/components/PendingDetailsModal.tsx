@@ -2,6 +2,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Alert,
   Modal,
@@ -33,6 +34,7 @@ export default function PendingDetailsModal({
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const [auth, setAuth] = useState<Auth>();
+  const { t } = useTranslation();
 
   const useAuth = async () => {
     const data = await AsyncStorage.getItem("@dadosUsuario");
@@ -49,11 +51,11 @@ export default function PendingDetailsModal({
         },
       });
       pendencias = pendencias.filter((p) => p.id !== id);
-      Alert.alert("Sucesso", "Pendência deletada com sucesso.");
+      Alert.alert("Sucesso", t("pendingDetailsModal.successMessage"));
       onPendingCreated && onPendingCreated();
       setDialogVisible(false);
     } catch {
-      Alert.alert("Erro", "Não foi possível deletar a pendência.");
+      Alert.alert("Erro", t("pendingDetailsModal.errorMessage"));
     }
   };
 
@@ -73,11 +75,14 @@ export default function PendingDetailsModal({
         },
       });
 
-      Alert.alert("Sucesso", "Pendência alterada com sucesso.");
+      Alert.alert(
+        "Sucesso",
+        t("pendingDetailsModal.changePendingSuccessMessage")
+      );
       onPendingCreated && onPendingCreated();
       setDialogVisible(false);
     } catch {
-      Alert.alert("Erro", "Não foi possível alterar a pendência.");
+      Alert.alert("Erro", t("pendingDetailsModal.changePendingErrorMessage"));
     }
   };
 
@@ -94,19 +99,27 @@ export default function PendingDetailsModal({
     >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Detalhes das Pendências</Text>
+          <Text style={styles.modalTitle}>
+            {t("pendingDetailsModal.modalTitle")}
+          </Text>
           <ScrollView style={{ maxHeight: 250 }}>
             {pendencias.length === 0 ? (
-              <Text style={styles.info}>Nenhuma pendência.</Text>
+              <Text style={styles.info}>
+                {t("pendingDetailsModal.withoutPendings")}
+              </Text>
             ) : (
               pendencias.map((p) => (
                 <View key={p.id} style={styles.pendingItem}>
                   <Text style={styles.info}>
-                    <Text style={{ fontWeight: "bold" }}>Descrição:</Text>{" "}
+                    <Text style={{ fontWeight: "bold" }}>
+                      {t("pendingDetailsModal.descriptionLabel")}
+                    </Text>{" "}
                     {p.description}
                   </Text>
                   <Text style={styles.info}>
-                    <Text style={{ fontWeight: "bold" }}>Status:</Text>{" "}
+                    <Text style={{ fontWeight: "bold" }}>
+                      {t("pendingDetailsModal.statusLabel")}
+                    </Text>{" "}
                     {p.status}
                   </Text>
                   <View style={{ flexDirection: "row", gap: 8 }}>
@@ -131,7 +144,9 @@ export default function PendingDetailsModal({
             style={styles.closeButton}
             onPress={() => setDialogVisible(false)}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Fechar</Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>
+              {t("pendingDetailsModal.closeModalButton")}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
