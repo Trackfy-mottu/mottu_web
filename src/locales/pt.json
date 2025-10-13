@@ -37,5 +37,24 @@
     "descriptionLabel": "Descrição: ",
     "statusLabel": "Status: ",
     "closeModalButton": "Fechar"
+  },
+  "signUp": {
+    "title": "Cadastro",
+    "nameLabel": "Nome",
+    "passwordLabel": "Senha",
+    "courtLabel": "Pátio",
+    "roleLabel": "Função",
+    "hasAccountText": "Já tem uma conta? ",
+    "notHasAccountText": "Não tem uma conta? ",
+    "signUpButton": "Cadastrar",
+    "formErrorMessage": "Por favor, preencha todos os campos obrigatórios.",
+    "requestErrorMessage": "Não foi possível cadastrar o usuário. Verifique os dados e tente novamente."
+  },
+  "aboutUs": {
+    "title": "Nosso time"
+  },
+  "bikes": {
+    "title": "Motos do Pátio",
+    "addBikeButton": "Cadastrar Moto"
   }
 }

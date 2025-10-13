@@ -3,6 +3,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ScrollView,
   StyleSheet,
@@ -32,6 +33,7 @@ export default function HomeScreen() {
   const [auth, setAuth] = useState<Auth | null>(null);
   const [loading, setLoading] = useState(false);
   const [bikes, setBikes] = useState<Bike[]>([]);
+  const { t } = useTranslation();
 
   const useAuth = async () => {
     const data = await AsyncStorage.getItem("@dadosUsuario");
@@ -74,7 +76,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Motos do Pátio</Text>
+      <Text style={styles.title}>{t("bikes.title")}</Text>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("BikesForm");
@@ -82,7 +84,7 @@ export default function HomeScreen() {
         style={styles.button}
       >
         <Ionicons name="add" size={20} color="#fff" />
-        <Text style={styles.buttonText}>Cadastrar Moto</Text>
+        <Text style={styles.buttonText}>{t("bikes.addBikeButton")}</Text>
       </TouchableOpacity>
       <ScrollView>
         {bikes.map((bike, index) => (

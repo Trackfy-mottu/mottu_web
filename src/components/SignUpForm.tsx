@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -38,6 +39,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
   const [loading, setLoading] = useState(false);
   const [showSenha, setShowSenha] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -60,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
   const handleSubmit = async () => {
     try {
       if (!username || !password || !name || !court || !role)
-        return setError("Por favor, preencha todos os campos.");
+        return setError(t("signUp.formErrorMessage"));
 
       setLoading(true);
       const body = {
@@ -79,7 +81,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
       setLoading(false);
       navigation.navigate("Drawer");
     } catch (error: any) {
-      setError("Falha no cadastro. Verifique suas informações.");
+      setError(t("signUp.requestErrorMessage"));
       console.error("Erro inesperado:", error);
       setLoading(false);
     }
@@ -96,12 +98,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
     >
       <View style={styles.inner}>
         <Text style={{ color: "#00A431", fontSize: 24, marginBottom: 20 }}>
-          {isLogin ? "Login" : "Cadastro"}
+          {t("signUp.title")}
         </Text>
         <Text style={{ color: "red", marginBottom: 10 }}>{error}</Text>
         <TextInput
           mode="outlined"
-          label="Nome"
+          label={t("signUp.nameLabel")}
           style={styles.input}
           textColor={colors.text}
           activeOutlineColor="#00A431"
@@ -121,7 +123,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
 
         <TextInput
           mode="outlined"
-          label="Senha"
+          label={t("signUp.passwordLabel")}
           style={styles.input}
           textColor={colors.text}
           activeOutlineColor="#00A431"
@@ -137,7 +139,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
         />
 
         <View style={styles.pickerWrapper}>
-          <Text style={styles.label}>Pátio</Text>
+          <Text style={styles.label}>{t("signUp.courtLabel")}</Text>
           <Picker
             selectedValue={court}
             style={styles.picker}
@@ -156,7 +158,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
         </View>
 
         <View style={styles.pickerWrapper}>
-          <Text style={styles.label}>Função</Text>
+          <Text style={styles.label}>{t("signUp.roleLabel")}</Text>
           <Picker
             selectedValue={role}
             style={styles.picker}
@@ -165,7 +167,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
           >
             <Picker.Item label="Admin" color={colors.text} value="ADMIN" />
             <Picker.Item
-              label="Funcionário"
+              label={t("signUp.roleLabel", {
+                context: "employee",
+                defaultValue: "Funcionário",
+              })}
               color={colors.text}
               value="EMPLOYEE"
             />
@@ -173,7 +178,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
         </View>
 
         <Text onPress={() => setIsLogin(!isLogin)} style={styles.toggleIsLogin}>
-          {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
+          {isLogin ? t("signUp.notHasAccountText") : t("signUp.hasAccountText")}
         </Text>
 
         <TouchableOpacity
@@ -185,7 +190,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
             <ActivityIndicator color={colors.buttonText} />
           ) : (
             <Text style={{ color: colors.buttonText }}>
-              {isLogin ? "Entrar" : "Cadastrar"}
+              {isLogin ? t("login.loginButton") : t("signUp.signUpButton")}
             </Text>
           )}
         </TouchableOpacity>

@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Card from "../components/Card";
 import { useTheme } from "../services/ThemeContext";
@@ -14,11 +15,12 @@ export default function About() {
   const navigation = useNavigation();
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>Nosso Time</Text>
+        <Text style={styles.title}>{t("aboutUs.title")}</Text>
 
         <Card
           nome="João Vitor da Silva"
