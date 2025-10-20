@@ -1,4 +1,5 @@
 {
+  "formErrorMessage": "Por favor, preencha todos os campos obrigatórios.",
   "addPendingModal": {
     "modalTitle": "Cadastrar Pendência",
     "descriptionInputLabel": "Descrição",
@@ -9,8 +10,7 @@
     "cancelButton": "Cancelar",
     "addButton": "Cadastrar",
     "errorMessage": "Não foi possível cadastrar a pendência.",
-    "successMessage": "Pendência cadastrada com sucesso.",
-    "formErrorMessage": "Preencha todos os campos obrigatórios."
+    "successMessage": "Pendência cadastrada com sucesso."
   },
   "bikeCard": {
     "successMessage": "Moto deletada com sucesso.",
@@ -47,7 +47,6 @@
     "hasAccountText": "Já tem uma conta? ",
     "notHasAccountText": "Não tem uma conta? ",
     "signUpButton": "Cadastrar",
-    "formErrorMessage": "Por favor, preencha todos os campos obrigatórios.",
     "requestErrorMessage": "Não foi possível cadastrar o usuário. Verifique os dados e tente novamente."
   },
   "aboutUs": {
@@ -56,5 +55,27 @@
   "bikes": {
     "title": "Motos do Pátio",
     "addBikeButton": "Cadastrar Moto"
+  },
+  "bikesForm": {
+    "createSuccessMessage": "Moto cadastrada com sucesso.",
+    "updateSuccessMessage": "Moto atualizada com sucesso.",
+    "title": "Cadastro de Moto",
+    "placaLabel": "Placa: ",
+    "idChassiLabel": "ID do Chassi: ",
+    "modeloOption": "Selecione o modelo",
+    "localizacaoOption": "Selecione a localização",
+    "statusOption": "Selecione o status",
+    "createButton": "Cadastrar",
+    "updateButton": "Editar"
+  },
+  "home": {
+    "buttonCourt": "Setores do Pátio",
+    "buttonBikes": "Motos do Pátio",
+    "buttonAboutUs": "Sobre Nós"
+  },
+  "logout": {
+    "confirmationMessage": "Tem certeza que deseja sair?",
+    "confirmButton": "Sim",
+    "cancelButton": "Não"
   }
 }

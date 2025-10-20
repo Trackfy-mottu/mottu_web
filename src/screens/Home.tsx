@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import ImagemButton from "../components/ImageButton";
 
+import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
 import logo from "../assets/logoTrackfy.png";
 import motoMottu from "../assets/motoMottu.jpg";
@@ -11,16 +12,25 @@ import { useTheme } from "../services/ThemeContext";
 const Home: React.FC = () => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <ScrollView>
         <ImagemButton
           src={patioMottu}
-          text="Setores do Pátio"
+          text={t("home.buttonCourt")}
           navigate="Patio"
         />
-        <ImagemButton src={motoMottu} text="Motos do Pátio" navigate="Bikes" />
-        <ImagemButton src={logo} text="Sobre Nós" navigate="AboutUs" />
+        <ImagemButton
+          src={motoMottu}
+          text={t("home.buttonBikes")}
+          navigate="Bikes"
+        />
+        <ImagemButton
+          src={logo}
+          text={t("home.buttonAboutUs")}
+          navigate="AboutUs"
+        />
       </ScrollView>
     </View>
   );

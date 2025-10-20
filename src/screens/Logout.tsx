@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../services/ThemeContext";
 
@@ -7,6 +8,8 @@ export default function LogoutScreen() {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const navigation = useNavigation();
+  const { t } = useTranslation();
+
   const handleLogout = async () => {
     await AsyncStorage.removeItem("@dadosUsuario");
     navigation.reset({
@@ -17,12 +20,12 @@ export default function LogoutScreen() {
 
   return (
     <View style={styles.inner}>
-      <Text style={styles.title}>Tem certeza que deseja sair?</Text>
+      <Text style={styles.title}>{t("logout.confirmationMessage")}</Text>
       <TouchableOpacity style={styles.button} onPress={() => handleLogout()}>
-        <Text style={styles.buttonText}>Sair</Text>
+        <Text style={styles.buttonText}>{t("logout.confirmButton")}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.cancelText}>Cancelar</Text>
+        <Text style={styles.cancelText}>{t("logout.cancelButton")}</Text>
       </TouchableOpacity>
     </View>
   );

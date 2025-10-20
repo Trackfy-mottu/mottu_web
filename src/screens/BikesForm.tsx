@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Alert,
   ScrollView,
@@ -45,6 +46,7 @@ const BikeSignUp: React.FC = () => {
   const [localizacao, setLocalizacao] = useState("");
   const [status, setStatus] = useState("");
   const [auth, setAuth] = useState<Auth>();
+  const { t } = useTranslation();
 
   const { colors } = useTheme();
   const styles = getStyles(colors);
@@ -59,7 +61,7 @@ const BikeSignUp: React.FC = () => {
   const handleEditar = async () => {
     if (!auth) return;
     if (!modelo || !placa || !status || !idChassi || !localizacao) {
-      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
+      Alert.alert("Erro", t("formErrorMessage"));
       return;
     }
 
@@ -85,7 +87,7 @@ const BikeSignUp: React.FC = () => {
       }
     );
 
-    Alert.alert("Sucesso", "Moto atualizada com sucesso!");
+    Alert.alert("Sucesso", t("bikesForm.updateSuccessMessage"));
     setModelo("");
     setPlaca("");
     setIdChassi("");
@@ -97,7 +99,7 @@ const BikeSignUp: React.FC = () => {
   const handleCadastrar = async () => {
     if (!auth) return;
     if (!modelo || !placa || !status || !idChassi || !localizacao) {
-      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
+      Alert.alert("Erro", t("formErrorMessage"));
       return;
     }
 
@@ -128,7 +130,7 @@ const BikeSignUp: React.FC = () => {
     setIdChassi("");
     setLocalizacao("");
     setStatus("");
-    Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
+    Alert.alert("Sucesso", t("bikesForm.createSuccessMessage"));
   };
 
   useEffect(() => {
@@ -151,11 +153,11 @@ const BikeSignUp: React.FC = () => {
       contentContainerStyle={{ padding: 20 }}
       keyboardShouldPersistTaps="handled"
     >
-      <Text style={styles.titulo}>Cadastro de Moto</Text>
+      <Text style={styles.titulo}>{t("bikesForm.title")}</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Placa"
+        placeholder={t("bikesForm.placaLabel")}
         placeholderTextColor={colors.text}
         value={placa}
         onChangeText={setPlaca}
@@ -163,7 +165,7 @@ const BikeSignUp: React.FC = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="ID do Chassi"
+        placeholder={t("bikesForm.idChassiLabel")}
         placeholderTextColor={colors.text}
         value={idChassi}
         onChangeText={setIdChassi}
@@ -175,7 +177,11 @@ const BikeSignUp: React.FC = () => {
         style={styles.input}
         onValueChange={setModelo}
       >
-        <Picker.Item color={colors.text} label="Selecione o modelo" value="" />
+        <Picker.Item
+          color={colors.text}
+          label={t("bikesForm.modeloOption")}
+          value=""
+        />
         <Picker.Item color={colors.text} label="Mottu Sport" value="Sport" />
         <Picker.Item color={colors.text} label="Mottu Pop" value="Pop" />
         <Picker.Item color={colors.text} label="Mottu E" value="E" />
@@ -188,7 +194,7 @@ const BikeSignUp: React.FC = () => {
       >
         <Picker.Item
           color={colors.text}
-          label="Selecione a localização"
+          label={t("bikesForm.localizacaoOption")}
           value=""
         />
         <Picker.Item color={colors.text} label="Fora do pátio" value="FORA" />
@@ -204,7 +210,11 @@ const BikeSignUp: React.FC = () => {
         style={styles.input}
         onValueChange={setStatus}
       >
-        <Picker.Item color={colors.text} label="Selecione o status" value="" />
+        <Picker.Item
+          color={colors.text}
+          label={t("bikesForm.statusOption")}
+          value=""
+        />
         <Picker.Item
           color={colors.text}
           label="Pronta Para Uso"
@@ -225,7 +235,9 @@ const BikeSignUp: React.FC = () => {
         style={styles.botaoCadastrar}
         onPress={!bike ? handleCadastrar : handleEditar}
       >
-        <Text style={styles.textoBotao}>{!bike ? "Cadastrar" : "Editar"}</Text>
+        <Text style={styles.textoBotao}>
+          {!bike ? t("bikesForm.createButton") : t("bikesForm.updateButton")}
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );

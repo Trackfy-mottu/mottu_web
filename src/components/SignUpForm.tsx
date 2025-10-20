@@ -62,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ isLogin, setIsLogin }) => {
   const handleSubmit = async () => {
     try {
       if (!username || !password || !name || !court || !role)
-        return setError(t("signUp.formErrorMessage"));
+        return setError(t("formErrorMessage"));
 
       setLoading(true);
       const body = {

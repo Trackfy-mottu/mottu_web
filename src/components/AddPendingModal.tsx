@@ -46,7 +46,7 @@ export default function AddPendingModal({
   const createPending = async () => {
     if (!auth) return;
     if (!description || !status) {
-      Alert.alert("Erro", t("addPendingModal.formErrorMessage"));
+      Alert.alert("Erro", t("formErrorMessage"));
       return;
     }
     try {

@@ -1,41 +1,81 @@
 {
+  "formErrorMessage": "Por favor, complete todos los campos obligatorios.",
   "addPendingModal": {
-    "modalTitle": "Registrar Pendencia",
+    "modalTitle": "Registrar Pendiente",
     "descriptionInputLabel": "Descripción",
     "inputPlaceholder": "Seleccione el estado de la tarea",
     "statusOption1": "Pendiente",
     "statusOption2": "En Progreso",
-    "statusOption3": "Resuelta",
+    "statusOption3": "Resuelto",
     "cancelButton": "Cancelar",
     "addButton": "Registrar",
-    "errorMessage": "No se pudo registrar la pendencia.",
-    "successMessage": "Pendencia registrada con éxito.",
-    "formErrorMessage": "Complete todos los campos obligatorios."
+    "errorMessage": "No se pudo registrar el pendiente.",
+    "successMessage": "Pendiente registrado con éxito."
   },
   "bikeCard": {
-    "successMessage": "Motocicleta eliminada con éxito.",
-    "errorMessage": "No se pudo eliminar la motocicleta.",
-    "addPendingButton": "Pendencia",
+    "successMessage": "Moto eliminada con éxito.",
+    "errorMessage": "No se pudo eliminar la moto.",
+    "addPendingButton": "Pendiente",
     "placaLabel": "Placa: ",
     "statusLabel": "Estado: ",
-    "pendenciasLabel": "Pendencias: ",
-    "showPendingsDetailsButton": "Ver detalles de las pendencias"
+    "pendenciasLabel": "Pendientes: ",
+    "showPendingsDetailsButton": "Ver detalles de los pendientes"
   },
   "login": {
     "passwordPlaceholder": "Contraseña",
     "hasAccountText": "¿Ya tienes una cuenta? ",
     "notHasAccountText": "¿No tienes una cuenta? ",
-    "loginButton": "Iniciar sesión"
+    "loginButton": "Entrar"
   },
   "pendingDetailsModal": {
-    "successMessage": "Pendencia eliminada con éxito.",
-    "errorMessage": "No se pudo eliminar la pendencia.",
-    "changePendingSuccessMessage": "Pendencia actualizada con éxito.",
-    "changePendingErrorMessage": "No se pudo actualizar la pendencia.",
-    "modalTitle": "Detalles de las Pendencias",
-    "withoutPendings": "No hay pendencias.",
+    "successMessage": "Pendiente eliminado con éxito.",
+    "errorMessage": "No se pudo eliminar el pendiente.",
+    "changePendingSuccessMessage": "Pendiente actualizado con éxito.",
+    "changePendingErrorMessage": "No se pudo actualizar el pendiente.",
+    "modalTitle": "Detalles de los Pendientes",
+    "withoutPendings": "Ningún pendiente.",
     "descriptionLabel": "Descripción: ",
     "statusLabel": "Estado: ",
     "closeModalButton": "Cerrar"
+  },
+  "signUp": {
+    "title": "Registro",
+    "nameLabel": "Nombre",
+    "passwordLabel": "Contraseña",
+    "courtLabel": "Patio",
+    "roleLabel": "Función",
+    "hasAccountText": "¿Ya tienes una cuenta? ",
+    "notHasAccountText": "¿No tienes una cuenta? ",
+    "signUpButton": "Registrar",
+    "requestErrorMessage": "No se pudo registrar el usuario. Verifique los datos e intente nuevamente."
+  },
+  "aboutUs": {
+    "title": "Nuestro Equipo"
+  },
+  "bikes": {
+    "title": "Motos del Patio",
+    "addBikeButton": "Registrar Moto"
+  },
+  "bikesForm": {
+    "createSuccessMessage": "Moto registrada con éxito.",
+    "updateSuccessMessage": "Moto actualizada con éxito.",
+    "title": "Registro de Moto",
+    "placaLabel": "Placa: ",
+    "idChassiLabel": "ID del Chasis: ",
+    "modeloOption": "Seleccione el modelo",
+    "localizacaoOption": "Seleccione la ubicación",
+    "statusOption": "Seleccione el estado",
+    "createButton": "Registrar",
+    "updateButton": "Editar"
+  },
+  "home": {
+    "buttonCourt": "Sectores del Patio",
+    "buttonBikes": "Motos del Patio",
+    "buttonAboutUs": "Sobre Nosotros"
+  },
+  "logout": {
+    "confirmationMessage": "¿Está seguro de que desea salir?",
+    "confirmButton": "Sí",
+    "cancelButton": "No"
   }
 }
