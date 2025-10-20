@@ -107,7 +107,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ isLogin, setIsLogin }) => {
         <TouchableOpacity
           disabled={loading}
           style={styles.button}
-          onPress={() => salvarLogin()}
+          onPress={() => navigation.navigate("Drawer")}
         >
           {loading ? (
             <ActivityIndicator color="#fff" />

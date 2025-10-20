@@ -53,7 +53,7 @@
     "title": "Our Team"
   },
   "bikes": {
-    "title": "Yard Bikes",
+    "title": "Court Bikes",
     "addBikeButton": "Add Bike"
   },
   "bikesForm": {
@@ -69,8 +69,8 @@
     "updateButton": "Edit"
   },
   "home": {
-    "buttonCourt": "Yard Sectors",
-    "buttonBikes": "Yard Bikes",
+    "buttonCourt": "Court Sectors",
+    "buttonBikes": "Court Bikes",
     "buttonAboutUs": "About Us"
   },
   "logout": {

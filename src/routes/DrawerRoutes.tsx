@@ -20,7 +20,8 @@ export type DrawerParamList = {
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import LanguageSelector from "../components/LanguageSelector";
 import LogoutScreen from "../screens/Logout";
 
 const DrawerRoutes: React.FC = () => {
@@ -33,21 +34,27 @@ const DrawerRoutes: React.FC = () => {
           <Ionicons name="navigate" size={28} color="#00A431" />
         ),
         headerRight: () => (
-          <TouchableOpacity
-            onPress={toggleTheme}
+          <View
             style={{
-              marginRight: 16,
-              padding: 6,
-              borderRadius: 6,
-              backgroundColor: colors.background,
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            {theme === "dark" ? (
-              <Feather name="sun" size={24} color={"#facc15"} />
-            ) : (
-              <Feather name="moon" size={24} color={"#facc15"} />
-            )}
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={toggleTheme}
+              style={{
+                borderRadius: 6,
+                backgroundColor: colors.background,
+              }}
+            >
+              {theme === "dark" ? (
+                <Feather name="sun" size={24} color={"#facc15"} />
+              ) : (
+                <Feather name="moon" size={24} color={"#facc15"} />
+              )}
+            </TouchableOpacity>
+            <LanguageSelector />
+          </View>
         ),
         headerStyle: {
           backgroundColor: colors.background,
