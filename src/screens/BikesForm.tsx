@@ -3,6 +3,7 @@ import { Picker } from "@react-native-picker/picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
+import * as Notifications from "expo-notifications";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -13,8 +14,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+
 import { AppStackParamList } from "../routes/StackRoutes";
 import { useTheme } from "../services/ThemeContext";
+import { triggerNotification } from "../services/notification";
 
 export interface Court {
   acessCode: string;
@@ -88,6 +91,11 @@ const BikeSignUp: React.FC = () => {
     );
 
     Alert.alert("Sucesso", t("bikesForm.updateSuccessMessage"));
+    triggerNotification({
+      title: t("bikesForm.updateNotificationTitle"),
+      body: t("bikesForm.updateNotificationBody", { modelo: modelo }),
+    });
+
     setModelo("");
     setPlaca("");
     setIdChassi("");
@@ -146,6 +154,26 @@ const BikeSignUp: React.FC = () => {
       setStatus(bike.status ?? "");
     }
   }, [bike]);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Notifications.getPermissionsAsync();
+      let finalStatus = status;
+
+      if (finalStatus !== "granted") {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+
+      if (finalStatus !== "granted") {
+        Alert.alert(
+          "Permissão negada",
+          "As notificações não foram autorizadas."
+        );
+        return;
+      }
+    })();
+  }, []);
 
   return (
     <ScrollView
