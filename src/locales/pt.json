@@ -68,7 +68,9 @@
     "createButton": "Cadastrar",
     "updateButton": "Editar",
     "updateNotificationTitle": "Atualização concluída",
-    "updateNotificationBody": "O modelo {{modelo}} foi atualizado com sucesso!"
+    "updateNotificationBody": "O modelo {{modelo}} foi atualizado com sucesso!",
+    "createNotificationTitle": "Cadastro concluído",
+    "createNotificationBody": "O modelo {{modelo}} foi cadastrado com sucesso!"
   },
   "home": {
     "buttonCourt": "Setores do Pátio",

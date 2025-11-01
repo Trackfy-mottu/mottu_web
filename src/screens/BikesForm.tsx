@@ -139,6 +139,10 @@ const BikeSignUp: React.FC = () => {
     setLocalizacao("");
     setStatus("");
     Alert.alert("Sucesso", t("bikesForm.createSuccessMessage"));
+    triggerNotification({
+      title: t("bikesForm.createNotificationTitle"),
+      body: t("bikesForm.createNotificationBody", { modelo: modelo }),
+    });
   };
 
   useEffect(() => {

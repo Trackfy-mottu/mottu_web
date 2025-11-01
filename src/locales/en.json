@@ -68,7 +68,9 @@
     "createButton": "Register",
     "updateButton": "Edit",
     "updateNotificationTitle": "Update completed",
-    "updateNotificationBody": "The model {{modelo}} has been updated successfully!"
+    "updateNotificationBody": "The model {{modelo}} has been updated successfully!",
+    "createNotificationTitle": "Registration completed",
+    "createNotificationBody": "The model {{modelo}} has been successfully registered!"
   },
   "home": {
     "buttonCourt": "Court Sectors",

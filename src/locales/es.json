@@ -68,7 +68,9 @@
     "createButton": "Registrar",
     "updateButton": "Editar",
     "updateNotificationTitle": "Actualización completada",
-    "updateNotificationBody": "El modelo {{modelo}} se ha actualizado correctamente!"
+    "updateNotificationBody": "El modelo {{modelo}} se ha actualizado correctamente!",
+    "createNotificationTitle": "Registro completado",
+    "createNotificationBody": "El modelo {{modelo}} se ha registrado con éxito!"
   },
   "home": {
     "buttonCourt": "Sectores del Patio",
