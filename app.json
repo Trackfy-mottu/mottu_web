@@ -16,7 +16,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.mottu.mobile",
       "infoPlist": {
-        "UIBackgroundModes": ["remote-notification"]
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
       }
     },
     "android": {
@@ -25,10 +27,16 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "package": "com.mottu.mobile"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fcefe929-087b-47d8-9f67-38e1131af510"
+      }
     }
   }
 }
