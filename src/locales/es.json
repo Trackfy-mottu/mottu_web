@@ -81,5 +81,10 @@
     "confirmationMessage": "¿Está seguro de que desea salir?",
     "confirmButton": "Sí",
     "cancelButton": "No"
+  },
+  "aboutApp": {
+    "title": "Acerca de la App",
+    "description": "Esta aplicación fue desarrollada para monitorear y gestionar el patio de motos en tiempo real, con actualización automática e interfaz sencilla.",
+    "commitLabel": "Commit de referencia:"
   }
 }

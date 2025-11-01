@@ -81,5 +81,10 @@
     "confirmationMessage": "Are you sure you want to log out?",
     "confirmButton": "Yes",
     "cancelButton": "No"
+  },
+  "aboutApp": {
+    "title": "About the App",
+    "description": "This app was developed to monitor and manage the motorcycle yard in real-time, with automatic updates and a simple interface.",
+    "commitLabel": "Reference commit:"
   }
 }

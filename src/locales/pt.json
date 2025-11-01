@@ -81,5 +81,10 @@
     "confirmationMessage": "Tem certeza que deseja sair?",
     "confirmButton": "Sim",
     "cancelButton": "Não"
+  },
+  "aboutApp": {
+    "title": "Sobre o App",
+    "description": "Este aplicativo foi desenvolvido para monitorar e gerenciar o pátio de motos em tempo real, com atualização automática e interface simples.",
+    "commitLabel": "Commit de referência:"
   }
 }

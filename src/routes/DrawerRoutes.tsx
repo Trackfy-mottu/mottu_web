@@ -16,12 +16,14 @@ export type DrawerParamList = {
   Patio: undefined;
   BikesForm: undefined;
   Logout: undefined;
+  AboutApp: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
 import { TouchableOpacity, View } from "react-native";
 import LanguageSelector from "../components/LanguageSelector";
+import AboutApp from "../screens/AboutApp";
 import LogoutScreen from "../screens/Logout";
 
 const DrawerRoutes: React.FC = () => {
@@ -89,6 +91,20 @@ const DrawerRoutes: React.FC = () => {
             <Ionicons name="people" size={20} color={color} />
           ),
           drawerLabel: "Sobre Nós",
+        }}
+      />
+      <Drawer.Screen
+        name="AboutApp"
+        component={AboutApp}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons
+              name="information-circle-outline"
+              size={20}
+              color={color}
+            />
+          ),
+          drawerLabel: "Sobre App",
         }}
       />
       <Drawer.Screen
