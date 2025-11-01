@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   StyleSheet,
   Text,
@@ -8,54 +10,107 @@ import {
 } from "react-native";
 import { useTheme } from "../services/ThemeContext";
 
-const areas = [
-  {
-    id: "A",
-    motos: [
-      { nome: "Moto 1", placa: "ABC-1234" },
-      { nome: "Moto 2", placa: "DEF-5678" },
-    ],
-    status: "disponivel",
-  },
-  {
-    id: "B",
-    motos: [{ nome: "Moto 3", placa: "GHI-9012" }],
-    status: "em_manutencao",
-  },
-  {
-    id: "C",
-    motos: [
-      { nome: "Moto 4", placa: "JKL-3456" },
-      { nome: "Moto 5", placa: "MNO-7890" },
-    ],
-    status: "indisponivel",
-  },
-  {
-    id: "D",
-    motos: [],
-    status: "disponivel",
-  },
-];
-
 const getColorByStatus = (status: string) => {
   switch (status) {
     case "disponivel":
       return "#4CAF50";
     case "em_manutencao":
       return "#FFC107";
-    case "indisponivel":
+    case "descarte":
       return "#F44336";
     default:
       return "#BDBDBD";
   }
 };
 
+interface Moto {
+  area: string;
+  modelo: string;
+  placa: string;
+}
+
+interface Area {
+  id: string;
+  motos: Moto[];
+  status: "disponivel" | "em_manutencao" | "descarte";
+}
+
 const PatioScreen: React.FC = () => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const [areas, setAreas] = useState<any[]>([]);
   const [areaSelecionada, setAreaSelecionada] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const areaMap: Record<string, string> = {
+    "area a": "A",
+    "area b": "B",
+    "area c": "C",
+    "area d": "D",
+  };
+
+  useEffect(() => {
+    const fetchMotos = async () => {
+      try {
+        const response = await axios.get("http://192.168.0.21:5435/motos");
+        const data = response.data;
+
+        const agrupado: Record<string, any[]> = {};
+        data.forEach((moto: any) => {
+          const areaId = areaMap[moto.area.toLowerCase()] || "?";
+          if (!agrupado[areaId]) agrupado[areaId] = [];
+          agrupado[areaId].push({
+            nome: moto.modelo,
+            placa: moto.placa,
+          });
+        });
+
+        const areasFormatadas: Area[] = [
+          {
+            id: "A",
+            motos: agrupado["A"] || [],
+            status: "disponivel",
+          },
+          {
+            id: "B",
+            motos: agrupado["B"] || [],
+            status: "disponivel",
+          },
+          {
+            id: "C",
+            motos: agrupado["C"] || [],
+            status: "em_manutencao",
+          },
+          {
+            id: "D",
+            motos: agrupado["D"] || [],
+            status: "descarte",
+          },
+        ];
+
+        setAreas(areasFormatadas);
+      } catch (error) {
+        console.error("Erro ao buscar motos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMotos();
+  }, []);
 
   const motosDaArea = areas.find((a) => a.id === areaSelecionada)?.motos || [];
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={colors.text} />
+        <Text style={{ color: colors.text, marginTop: 10 }}>
+          Carregando motos...
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
