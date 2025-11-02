@@ -43,7 +43,7 @@
     "nameLabel": "Nome",
     "passwordLabel": "Senha",
     "courtLabel": "Pátio",
-    "roleLabel": "Função",
+    "roleLabel": "Funcionário",
     "hasAccountText": "Já tem uma conta? ",
     "notHasAccountText": "Não tem uma conta? ",
     "signUpButton": "Cadastrar",

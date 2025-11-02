@@ -43,7 +43,7 @@
     "nameLabel": "Name",
     "passwordLabel": "Password",
     "courtLabel": "Court",
-    "roleLabel": "Role",
+    "roleLabel": "Employee",
     "hasAccountText": "Already have an account? ",
     "notHasAccountText": "Don’t have an account? ",
     "signUpButton": "Sign Up",
