@@ -1,7 +1,5 @@
 # 🏍️ Mottu Mobile - Sistema de Gerenciamento de Motos
 
-## Link da Apresentação
--  https://youtu.be/FUq_KvbYogI
 
 ## 📋 Descrição do Projeto
 
@@ -198,7 +196,8 @@ O aplicativo se integra com um sistema backend dividido em duas camadas:
 ## 📹 Demonstração
 
 **Vídeo completo da aplicação em funcionamento:**
-[🎥 https://youtu.be/Yhw00OrE6qs](https://youtu.be/Yhw00OrE6qs)
+[[🎥 Link](https://youtu.be/FUq_KvbYogI)]
+
 
 *O vídeo apresenta todas as funcionalidades do aplicativo, desde o login até a gestão completa de motos e pendências.*
 
